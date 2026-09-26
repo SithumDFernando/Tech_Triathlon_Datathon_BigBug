@@ -15,7 +15,7 @@
 
 ## File Index
 
-### General Data (`data/General Data/`)
+### General Data (`data/raw/General Data/`)
 
 | File | Purpose |
 |---|---|
@@ -27,14 +27,14 @@
 | `traffic_speed.csv` | Typical congestion by district and hour |
 | `road_conditions.csv` | Date-specific district disruptions (roadworks, flooding, incidents) |
 
-### Training Data (`data/Training Data/`)
+### Training Data (`data/raw/Training Data/`)
 
 | File | Purpose |
 |---|---|
 | `deliveries_train.csv` | Historical orders — one row per order (`delivery_id`), includes dispatched and deferred/not_run |
 | `route_legs_train.csv` | Historical route legs — one row per leg, includes planned AND actual times |
 
-### Test Data (`data/Test Data/`)
+### Test Data (`data/raw/Test Data/`)
 
 | File | Purpose |
 |---|---|
@@ -44,7 +44,7 @@
 | `task2b_peak_day_scenarios.csv` | Task 2B orders — one row per order in the peak-day scenario |
 | `task2b_peak_day_fleet.csv` | Task 2B fleet — vehicle availability for the scenario day |
 
-### Submission Templates (`data/Submission Templates/`)
+### Submission Templates (`data/raw/Submission Templates/`)
 
 | File | Task |
 |---|---|

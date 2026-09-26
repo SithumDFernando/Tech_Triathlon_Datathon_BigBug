@@ -15,7 +15,7 @@ Submission form: https://forms.gle/CcPPmttWdQgHvUdi6
 ## Packaging
 
 - Place all deliverables in **one folder**.
-- Compress as **`TeamName_Datathon.zip`**.
+- Compress as **`BigBug_Datathon.zip`**.
 - Upload through the submission form.
 
 ---
@@ -38,7 +38,7 @@ Submission form: https://forms.gle/CcPPmttWdQgHvUdi6
 
 ### 2. Final Notebook
 
-- [ ] **`TeamName_FinalNotebook.ipynb`**
+- [ ] **`BigBug_FinalNotebook.ipynb`**
   - Retain cells for: label construction, preprocessing, training, evaluation
   - Add a **final cell** that:
     - Loads saved models

@@ -44,10 +44,10 @@ All specs live in [`docs/specs/`](docs/specs/). Read these before writing any co
 
 | Path | Contents |
 |---|---|
-| `data/General Data/` | Reference tables: outlets, vehicles, calendar, district_travel, service_allowance, traffic_speed, road_conditions |
-| `data/Training Data/` | `deliveries_train.csv`, `route_legs_train.csv` |
-| `data/Test Data/` | Task inputs: `task1_test_inputs.csv`, `route_legs_test.csv`, `task2a_test_inputs.csv`, `task2b_peak_day_scenarios.csv`, `task2b_peak_day_fleet.csv` |
-| `data/Submission Templates/` | `submission_task1.csv`, `submission_task2a.csv`, `submission_task2b.csv` |
+| `data/raw/General Data/` | Reference tables: outlets, vehicles, calendar, district_travel, service_allowance, traffic_speed, road_conditions |
+| `data/raw/Training Data/` | `deliveries_train.csv`, `route_legs_train.csv` |
+| `data/raw/Test Data/` | Task inputs: `task1_test_inputs.csv`, `route_legs_test.csv`, `task2a_test_inputs.csv`, `task2b_peak_day_scenarios.csv`, `task2b_peak_day_fleet.csv` |
+| `data/raw/Submission Templates/` | `submission_task1.csv`, `submission_task2a.csv`, `submission_task2b.csv` |
 | `check_allocation.py` | Task 2B feasibility validator |
 | `docs/reference/` | Original challenge documents (scenario.md, datathon.md) |
 

@@ -120,11 +120,11 @@ A Fresh trip to Gampaha with 3 orders (2 rear_dock, 1 street):
 
 | File | Location | Use |
 |---|---|---|
-| `task2b_peak_day_scenarios.csv` | `data/Test Data/` | All orders in the scenario |
-| `task2b_peak_day_fleet.csv` | `data/Test Data/` | Vehicle availability |
-| `vehicles.csv` | `data/General Data/` | Vehicle capacity, type, temp, depot |
-| `district_travel.csv` | `data/General Data/` | Travel times for trip calculation |
-| `service_allowance.csv` | `data/General Data/` | Handling times for trip calculation |
+| `task2b_peak_day_scenarios.csv` | `data/raw/Test Data/` | All orders in the scenario |
+| `task2b_peak_day_fleet.csv` | `data/raw/Test Data/` | Vehicle availability |
+| `vehicles.csv` | `data/raw/General Data/` | Vehicle capacity, type, temp, depot |
+| `district_travel.csv` | `data/raw/General Data/` | Travel times for trip calculation |
+| `service_allowance.csv` | `data/raw/General Data/` | Handling times for trip calculation |
 
 ### Fleet Availability
 
@@ -136,7 +136,7 @@ A Fresh trip to Gampaha with 3 orders (2 rear_dock, 1 street):
 
 ## Output Format
 
-Complete `data/Submission Templates/submission_task2b.csv`:
+Complete `data/raw/Submission Templates/submission_task2b.csv`:
 
 | Column | Requirement |
 |---|---|
@@ -172,7 +172,7 @@ Consider using `deferred_yesterday` and `days_since_last_served` columns to prio
 Run `check_allocation.py` before submitting:
 
 ```bash
-python check_allocation.py "data/Submission Templates/submission_task2b.csv"
+python check_allocation.py "data/raw/Submission Templates/submission_task2b.csv"
 ```
 
 A passing result confirms feasibility (all rules satisfied), NOT optimality. Judges separately assess prioritization reasoning.

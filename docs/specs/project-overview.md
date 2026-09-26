@@ -35,10 +35,13 @@ Waypoint Group (Pvt) Ltd is a **fictional** Sri Lankan retail group with three b
 ```
 ├── check_allocation.py              # Task 2B feasibility validator
 ├── data/
-│   ├── General Data/                # outlets, vehicles, calendar, district_travel, service_allowance, traffic_speed, road_conditions
-│   ├── Training Data/               # deliveries_train.csv, route_legs_train.csv
-│   ├── Test Data/                   # task1_test_inputs, route_legs_test, task2a_test_inputs, task2b scenario files
-│   └── Submission Templates/        # submission_task1.csv, submission_task2a.csv, submission_task2b.csv
+│   └── raw/                         # Original competition data
+│       ├── General Data/            # outlets, vehicles, calendar, district_travel, service_allowance, traffic_speed, road_conditions
+│       ├── Training Data/           # deliveries_train.csv, route_legs_train.csv
+│       ├── Test Data/               # task1_test_inputs, route_legs_test, task2a_test_inputs, task2b scenario files
+│       └── Submission Templates/    # submission_task1.csv, submission_task2a.csv, submission_task2b.csv
+├── src/                             # Python source files
+├── notebooks/                       # Jupyter notebooks
 ├── docs/
 │   ├── reference/                   # scenario.md, datathon.md (original challenge docs)
 │   └── specs/                       # Agent-facing spec files (this directory)

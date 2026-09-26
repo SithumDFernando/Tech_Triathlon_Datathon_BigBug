@@ -1,6 +1,8 @@
-# Tech Triathlon 2026 — Datathon
+# Tech Triathlon 2026 — Datathon | Team BigBug
 
 This repository contains data, documentation, evaluation scripts, and solutions for the **Tech Triathlon 2026 Datathon** challenge (Waypoint Group logistics optimization).
+
+**Team:** BigBug
 
 ---
 
@@ -19,6 +21,7 @@ The competition consists of three primary data science and optimization tasks:
 ## 📁 Repository Structure
 
 ```text
+├── AGENTS.md                    # AI agent entry point — links all specs
 ├── check_allocation.py          # Feasibility validator for Task 2B submissions
 ├── data/
 │   ├── General Data/            # Calendars, vehicle specs, district travel times, service allowances
@@ -26,7 +29,8 @@ The competition consists of three primary data science and optimization tasks:
 │   ├── Test Data/               # Test inputs for Task 1, Task 2A, and Task 2B
 │   └── Training Data/           # Historical delivery and route leg records
 └── docs/
-    └── reference/               # Problem statements and domain references (datathon, scenario, etc.)
+    ├── reference/               # Original challenge documents (scenario.md, datathon.md)
+    └── specs/                   # Agent-facing spec files (rules, constraints, task details)
 ```
 
 ---

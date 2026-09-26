@@ -62,10 +62,10 @@ For each (depot, brand, iso_year, iso_week) combination, sum:
 
 | File | Location | Use |
 |---|---|---|
-| `task2a_test_inputs.csv` | `data/Test Data/` | Forecast grid — rows to predict |
-| `deliveries_train.csv` | `data/Training Data/` | Historical orders for training |
-| `task1_test_inputs.csv` | `data/Test Data/` | Additional historical orders for training |
-| `calendar.csv` | `data/General Data/` | Maps dates to iso_year/iso_week + contextual features |
+| `task2a_test_inputs.csv` | `data/raw/Test Data/` | Forecast grid — rows to predict |
+| `deliveries_train.csv` | `data/raw/Training Data/` | Historical orders for training |
+| `task1_test_inputs.csv` | `data/raw/Test Data/` | Additional historical orders for training |
+| `calendar.csv` | `data/raw/General Data/` | Maps dates to iso_year/iso_week + contextual features |
 
 ---
 
@@ -82,7 +82,7 @@ For each (depot, brand, iso_year, iso_week) combination, sum:
 
 ## Output Format
 
-Complete `data/Submission Templates/submission_task2a.csv`:
+Complete `data/raw/Submission Templates/submission_task2a.csv`:
 
 | Column | Requirement |
 |---|---|

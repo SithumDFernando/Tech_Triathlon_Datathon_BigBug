@@ -55,17 +55,17 @@ is_late = 1 if arrival_time > window_close_time, else 0
 
 | File | Location | Use |
 |---|---|---|
-| `deliveries_train.csv` | `data/Training Data/` | Training orders — derive labels by joining to route legs |
-| `route_legs_train.csv` | `data/Training Data/` | Training route legs — contains actual times for label derivation |
-| `task1_test_inputs.csv` | `data/Test Data/` | Test orders to predict on |
-| `route_legs_test.csv` | `data/Test Data/` | Test route legs — planned times only |
-| `outlets.csv` | `data/General Data/` | Outlet attributes (dock_type, windows, etc.) |
-| `vehicles.csv` | `data/General Data/` | Vehicle attributes |
-| `calendar.csv` | `data/General Data/` | Date context (monsoon, payday, festival, etc.) |
-| `district_travel.csv` | `data/General Data/` | Travel distances and times |
-| `service_allowance.csv` | `data/General Data/` | Planning allowances per brand + dock_type |
-| `traffic_speed.csv` | `data/General Data/` | Congestion index |
-| `road_conditions.csv` | `data/General Data/` | Date-specific disruptions |
+| `deliveries_train.csv` | `data/raw/Training Data/` | Training orders — derive labels by joining to route legs |
+| `route_legs_train.csv` | `data/raw/Training Data/` | Training route legs — contains actual times for label derivation |
+| `task1_test_inputs.csv` | `data/raw/Test Data/` | Test orders to predict on |
+| `route_legs_test.csv` | `data/raw/Test Data/` | Test route legs — planned times only |
+| `outlets.csv` | `data/raw/General Data/` | Outlet attributes (dock_type, windows, etc.) |
+| `vehicles.csv` | `data/raw/General Data/` | Vehicle attributes |
+| `calendar.csv` | `data/raw/General Data/` | Date context (monsoon, payday, festival, etc.) |
+| `district_travel.csv` | `data/raw/General Data/` | Travel distances and times |
+| `service_allowance.csv` | `data/raw/General Data/` | Planning allowances per brand + dock_type |
+| `traffic_speed.csv` | `data/raw/General Data/` | Congestion index |
+| `road_conditions.csv` | `data/raw/General Data/` | Date-specific disruptions |
 
 ---
 
@@ -98,7 +98,7 @@ The challenge does NOT prescribe a feature set — choose and justify your own. 
 
 ## Output Format
 
-Complete `data/Submission Templates/submission_task1.csv`:
+Complete `data/raw/Submission Templates/submission_task1.csv`:
 
 | Column | Requirement |
 |---|---|
