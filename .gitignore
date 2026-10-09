@@ -37,3 +37,6 @@ models/*.cbm
 
 # Submission zip
 *_Datathon.zip
+
+#PDF
+*.pdf
