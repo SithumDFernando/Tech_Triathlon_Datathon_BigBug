@@ -83,7 +83,7 @@ _Highlight validation metrics on screen: `Val RMSE: 6.247`, `Val MAE: 3.918`, `V
 
 > _"We evaluated our models using a strict 75-week train and 4-week holdout split._
 >
-> _For service time regression, our LightGBM model achieves an MAE under 4 minutes and an R² of 0.78, explaining the vast majority of service duration variance."_
+> _For service time regression, our LightGBM model achieves an Mean Absolute Error under 4 minutes and an R² of 0.78, explaining the vast majority of service duration variance."_
 
 ---
 
@@ -93,7 +93,7 @@ _Highlight Cell 17 output: `After calibration — Brier: 0.0400, AUC: 0.9750`._
 
 🗣️ **[SAY — Tone: Explanatory, technical]:**
 
-> _"For lateness classification, gradient boosting achieved a high ROC-AUC of 0.975. Crucially, we applied Isotonic Calibration, driving our Brier score down to 0.04. This ensures our predicted probabilities reflect genuine operational risks rather than overconfident tree scores."_
+> _"For lateness classification, gradient boosting achieved a high ROC Area Under Curve of 0.975. Crucially, we applied Isotonic Calibration, driving our Brier score down to 0.04. This ensures our predicted probabilities reflect genuine operational risks rather than overconfident tree scores."_
 
 ---
 
