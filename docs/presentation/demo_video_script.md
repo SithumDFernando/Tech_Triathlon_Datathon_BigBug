@@ -1,160 +1,203 @@
 # Team BigBug — Datathon Demo Video Presentation Script
 
-> **Target Duration:** 3:30 – 4:00 Minutes (Competition requirement: 3–5 minutes)  
-> **Format:** Screen recording with voiceover (upload as **Unlisted** YouTube video)  
+> **Target Duration:** 3:30 – 4:00 Minutes (Competition window: 3–5 minutes)  
+> **Presentation Style:** Conversational, confident, human-paced screen recording with voiceover  
+> **Video Format:** Screen recording uploaded to YouTube as **Unlisted**  
 > **Deliverable Item:** Item 7 in Deliverables Checklist (10% of total Datathon score)  
-> **Key Topics Covered:** Model Architecture, Preprocessing Pipeline, Label Construction, Operational Challenges, Validation Results, and Live Inference.
+> **Key Topics:** System Architecture, Data Preprocessing, Label Construction, Calibrated Machine Learning, Demand Forecasting, Constraint Optimization Policy, and Live Inference.
 
 ---
 
 ## 🎬 Quick Setup Checklist Before You Hit Record
 
-1. **Screen Resolution:** 1080p (1920x1080) recommended. Zoom in your editor/browser slightly (`Ctrl + +`) so code and text are sharp and easy to read.
-2. **Windows to Have Ready:**
+1. **Resolution & Zoom:** 1080p (1920×1080). Press `Ctrl + +` once or twice in VS Code so all notebook code and markdown headings are easy to read.
+2. **Windows Prepared:**
    - **Window 1 (Main):** VS Code with `BigBug_FinalNotebook.ipynb` open.
-   - **Window 2 (Terminal):** Split terminal or command prompt inside project root (`TT_Datathon`).
-   - **Window 3 (Optional backup):** `docs/architecture_diagrams.md` preview in VS Code or browser.
+   - **Window 2 (Terminal):** Terminal pane split at the bottom or separate window in project root (`TT_Datathon`).
+   - **Window 3 (Reference):** `docs/architecture_diagrams.md` preview open in a side tab.
 3. **Recording Tool:** 
-   - Windows Game Bar (`Win + G` → Click Record)
-   - OR OBS Studio / Loom / Zoom (Host a solo meeting, share screen, click Record).
+   - Windows Game Bar (`Win + G` → Start Recording)
+   - OR OBS Studio / Loom / Zoom (Solo meeting → Share Screen → Record).
 
 ---
 
-## ⏱️ Scene-by-Scene Script with Exact Visual Cues
+## ⏱️ Scene-by-Scene Script with Exact In-Line Scroll Anchors
 
 ---
 
 ### ⏱️ [0:00 – 0:35] Scene 1: Introduction & High-Level Architecture
 
-#### 👁️ Visual Cues (What to show on screen)
-* **Start On:** `BigBug_FinalNotebook.ipynb` at the very top (Title markdown cell: *"Task 1: Service Time & Lateness Prediction — Team BigBug"*).
-* **Switch / Scroll To:** `docs/architecture_diagrams.md` (or the architecture diagram preview) showing the **End-to-End Pipeline Diagram** (Data Sources → Preprocessing → Modeling → Submissions).
-* **Mouse Action:** Slowly hover over the boxes: `deliveries_train.csv` + `route_legs_train.csv` feeding into Preprocessing, then branching to LightGBM and the Greedy Allocator.
+#### 📍 [ACTION 1A]: Start at top of `BigBug_FinalNotebook.ipynb`
+*Show the title markdown cell: `# Task 1: Service Time & Lateness Prediction — Team BigBug`.*
 
-#### 🎙️ Spoken Audio (Word-for-Word Script)
-> *"Hello judges, we are Team BigBug. Today, we're presenting our complete data science and optimization solution for the Waypoint Group Datathon.*
+🗣️ **[SAY — Tone: Warm, welcoming, confident]:**
+> *"Hi everyone, and welcome judges! We are Team BigBug, and today we’re excited to walk you through our complete solution for the Waypoint Group Datathon challenge.*
 > 
-> *Waypoint Group manages a complex, shared retail distribution network across three distinct brands—Fresh, Style, and Tech—supplying 120 retail outlets from central depots in Peliyagoda and Kandy.*
+> *Waypoint Group operates a shared logistics network across Sri Lanka, serving one hundred and twenty retail outlets from two central distribution depots in Peliyagoda and Kandy across three distinct retail brands: Fresh for groceries, Style for apparel, and Tech for consumer electronics."*
+
+---
+
+#### 📍 [ACTION 1B]: Switch to tab `docs/architecture_diagrams.md` (Mermaid Flowchart)
+*Hover cursor over the flowchart showing Data Sources (`deliveries_train.csv`, `route_legs_train.csv`, `calendar.csv`) flowing into Preprocessing, then into LightGBM models and the Greedy Allocator.*
+
+🗣️ **[SAY — Tone: Analytical, clear]:**
+> *"To solve the challenge, we designed an end-to-end modular pipeline. As you can see in our system architecture diagram, we take the raw operational data—including delivery legs, vehicle constraints, district travel matrices, and calendar events—and unify them into a single source of truth.*
 > 
-> *As shown in our system architecture, our approach unifies transactional deliveries, route tracking, store parking constraints, and Sri Lankan calendar data into a robust, single-source-of-truth pipeline. We leverage LightGBM machine learning models for service duration and demand forecasting, and a constraint-based bin-packing solver for peak-day fleet allocation."*
+> *From there, we branch into three tailored engines: Light Gradient Boosting Machine—or LightGBM—for service time regression, an Isotonic-calibrated classifier for lateness probability, a recursive time-series model for weekly demand forecasting, and a constraint-based bin-packing solver for festival peak-day fleet allocation."*
 
 ---
 
 ### ⏱️ [0:35 – 1:30] Scene 2: Data Preprocessing & Label Construction (Task 1)
 
-#### 👁️ Visual Cues (What to show on screen)
-* **Switch Back To:** `BigBug_FinalNotebook.ipynb`.
-* **Scroll To:** **"1. Load Data & Construct Labels"** (Cells 3 and 4).
-* **Highlight / Point To:** 
-  * The `construct_labels` import and execution.
-  * The printed output:
-    * `Service time stats: mean = 19.85 min, median = 16.0 min`
-    * `Late rate: 0.1958 (17,991 / 91,894)`
-    * `Early arrival rate: 0.0438`
-* **Scroll Down Slightly To:** Feature engineering section showing the 37 engineered variables (`window_duration_min`, `planned_slack_min`, `arrived_early`, `dow`, `festival_ramp`).
+#### 📍 [ACTION 2A]: Switch back to `BigBug_FinalNotebook.ipynb` and scroll to Cell 3 & 4
+*Scroll to `## 1. Load Data & Construct Labels`. Highlight the output of Cell 3 showing 92,307 delivery rows and 91,894 route leg rows.*
 
-#### 🎙️ Spoken Audio (Word-for-Word Script)
-> *"Moving to Task 1, our most critical preprocessing challenge was label construction, as raw logs did not provide ground-truth targets directly.*
+🗣️ **[SAY — Tone: Engaging, storytelling]:**
+> *"Jumping into Task 1, our first major hurdle was that the raw data didn't come with pre-packaged labels. We had ninety-two thousand three hundred and seven historical delivery orders and ninety-one thousand eight hundred and ninety-four route leg records.*
 > 
-> *We constructed `service_time_min` as outlet departure time minus arrival time. An interesting operational challenge we discovered was that early vehicle arrivals artificially inflate duration, because drivers must wait for the outlet delivery window to open. Rather than manually deducting wait time, we engineered features such as `planned_slack_min` and `arrived_early` to allow our model to learn true dwell time patterns naturally.*
-> 
-> *For lateness, we constructed a binary target indicating whether arrival exceeded the delivery window close time.*
-> 
-> *Our pipeline extracts 37 rich features—capturing order volume and weight, road network speeds, store dock types, and temporal factors like payday surges and holiday traffic."*
+> *To construct the service duration label, we took the outlet departure time and subtracted the arrival time. But as we explored the data, we noticed something interesting: vehicles often arrive early, before the store's scheduled delivery window even opens. Drivers end up waiting at the dock, which artificially inflates their dwell time."*
 
 ---
 
-### ⏱️ [1:30 – 2:30] Scene 3: Modeling, Calibration & Forecasting (Task 1 & Task 2A)
+#### 📍 [ACTION 2B]: In Cell 4, highlight the printed summary stats
+*Point cursor to: `mean: 19.85 min`, `median: 16.0 min`, `Late rate: 0.1958 (17991 / 91894)`, `Early arrival rate: 0.0438`.*
 
-#### 👁️ Visual Cues (What to show on screen)
-* **In Notebook:** Scroll to **Task 1 Model Evaluation** cells.
-* **Highlight Output 1 (Service Time):**
-  * `Train RMSE: 5.648 | Val RMSE: 6.247`
-  * `Train MAE: 3.930 | Val MAE: 3.918`
-  * `Val R²: 0.7821`
-* **Highlight Output 2 (Lateness & Calibration):**
-  * `Train ROC AUC: 0.9419 | Val ROC AUC: 0.9381`
-  * `Val Brier Score: 0.0401`
-  * `Val Log Loss: 0.1444`
-* **Scroll Down To:** **Task 2A Demand Forecasting** (the step-by-step recursive forecast loop across weeks 14 to 23).
-* **Point To:** The rule enforcing `pred_chilled_volume_m3 = 0.0` for Style and Tech.
-
-#### 🎙️ Spoken Audio (Word-for-Word Script)
-> *"For predictive modeling, we chose LightGBM for its speed and superior handling of tabular interactions.*
+🗣️ **[SAY — Tone: Thoughtful, pragmatic]:**
+> *"Rather than artificially stripping out that wait time with arbitrary rules, we recognized that in real-world retail logistics, early dwell time is part of the physical delivery cost. We capped extreme loading outliers at one hundred and eighty minutes, and preserved the true operational duration.*
 > 
-> *For service time regression, our model achieved a validation RMSE of 6.2 minutes and an MAE of 3.9 minutes, explaining over 78% of service variance.*
+> *Our dataset revealed an average service duration of nineteen point eight-five minutes, an early arrival rate of four point three-eight percent, and an overall historical lateness rate of nineteen point five-eight percent—meaning roughly one in five deliveries ran late.*
 > 
-> *For lateness probability, standard tree classifiers often output overconfident scores. To resolve this, we applied Isotonic Regression calibration. This dramatically improved our probability reliability, achieving an outstanding validation ROC-AUC of 0.938 and reducing our Brier score to 0.040.*
-> 
-> *For Task 2A, we built a recursive time-series forecaster projecting 10 weeks of depot demand. We engineered 4-week autoregressive lag features and aggregated weekly calendar variables—such as payday counts and the Sinhala and Tamil New Year festival ramp. Importantly, we strictly enforced domain rules: ambient brands Style and Tech were locked to exactly zero chilled volume."*
+> *For lateness, we defined a clean binary indicator: did the vehicle's arrival time exceed the customer window close time?"*
 
 ---
 
-### ⏱️ [2:30 – 3:20] Scene 4: Task 2B Peak-Day Allocation & Feasibility
+#### 📍 [ACTION 2C]: Scroll to Cell 9 (`Total model features: 37`)
+*Highlight the feature list: `order_units`, `order_weight_kg`, `order_volume_m3`, `dow`, `is_payday`, `festival_ramp`, `window_duration_min`, `planned_slack_min`, `speed_index`.*
 
-#### 👁️ Visual Cues (What to show on screen)
-* **Open Terminal Window:** Bring terminal into focus.
-* **Type and Run:** 
-  ```bash
-  python check_allocation.py "BigBug_Datathon/submission_task2b.csv"
-  ```
-* **Wait 1 Second & Highlight Output:**
-  ```text
-  FEASIBILITY: PASSED - every rule satisfied.
-  ```
-* **Briefly Show / Mention:** `docs/task2b_prioritization_policy.md` summary (the calculation showing 181.6 m³ chilled demand vs 172.4 m³ theoretical fleet capacity).
+🗣️ **[SAY — Tone: Confident, technical]:**
+> *"To help the models capture these dynamics, we engineered exactly thirty-seven features across four pillars: physical order attributes like units, weight, and volume; temporal signals including Day of the Week—or DOW—payday spikes, and the April festival ramp; route geography like stop sequence and speed indices; and buffer metrics like planned slack minutes, which directly tell the model how tight a delivery window is."*
 
-#### 🎙️ Spoken Audio (Word-for-Word Script)
-> *"Task 2B presented an operational constraint optimization challenge during Scenario S1. On this festival peak day, demand surged while several vehicles were sidelined in the workshop.*
+---
+
+### ⏱️ [1:30 – 2:30] Scene 3: Modeling, Probability Calibration & Forecasting (Task 1 & 2A)
+
+#### 📍 [ACTION 3A]: Scroll to Cell 12 (`=== Service Time Model ===`)
+*Highlight Cell 12 output: `Train RMSE: 5.648 | Val RMSE: 6.247`, `Train MAE: 3.930 | Val MAE: 3.918`, `Val R²: 0.7821`.*
+
+🗣️ **[SAY — Tone: Direct, results-focused]:**
+> *"We trained our models using Light Gradient Boosting Machine on a strict time-based split—using the first seventy-five weeks for training, and holding out the final four weeks as our validation set.*
 > 
-> *Through mathematical capacity analysis, we identified the definitive bottleneck: Refrigerated vehicle capacity. Chilled demand reached 181.6 cubic meters across 26 orders, but Peliyagoda only had 4 available reefer vehicles, yielding a maximum two-trip capacity of 172.4 cubic meters. Serving all chilled orders was mathematically impossible.*
+> *For service time regression, our model achieved a validation Root Mean Squared Error—or RMSE—of six point two-four-seven minutes, an average Mean Absolute Error—or MAE—of just three point nine-one-eight minutes, and a Coefficient of Determination—or R-squared—of zero point seven-eight-two-one, meaning it explains over seventy-eight percent of service duration variance."*
+
+---
+
+#### 📍 [ACTION 3B]: Scroll to Cell 15 & 17 (`=== Lateness Probability Model ===` & `Calibration`)
+*Highlight Cell 15 output: `Val ROC AUC: 0.9738`, `Val Brier Score: 0.0475`.*  
+*Then highlight Cell 17 output: `After calibration — Brier: 0.0400, AUC: 0.9750`.*
+
+🗣️ **[SAY — Tone: Explanatory, proud]:**
+> *"For lateness prediction, raw gradient-boosted trees gave us a strong Receiver Operating Characteristic Area Under the Curve—or ROC-AUC—of zero point nine-seven-three-eight. But tree classifiers are notoriously overconfident with raw probabilities.*
 > 
-> *We implemented a greedy bin-packing prioritization policy designed around fairness and customer retention: outlets deferred yesterday were strictly protected from back-to-back stockouts. In total, 14 orders were deferred—13 chilled Fresh orders and 1 Style order—all of which had been served the previous day.*
+> *To fix this, we passed the predicted probabilities through an Isotonic Calibrator. This pushed our validation ROC-AUC up to zero point nine-seven-five-zero, and lowered our Brier Score—which measures probability calibration error—down to zero point zero-four-zero-zero, ensuring our probability scores represent true statistical likelihoods."*
+
+---
+
+#### 📍 [ACTION 3C]: Scroll down to `## 3. Generate Forecast (Weeks 14-23)` in Task 2A
+*Highlight Cell 5 & 6 (recursive loop from week 14 to 23), then Cell 7 displaying the submission head (`W0000 = 1037.36 m³ total, 381.87 m³ chilled`, and `W0001 Style chilled = 0.0000`).*
+
+🗣️ **[SAY — Tone: Systematic]:**
+> *"Moving to Task 2A, we forecasted depot demand for ten future weeks—from International Organization for Standardization—or ISO—week fourteen through week twenty-three of 2026 across both depots and all three brands.*
 > 
-> *As verified live in our terminal, running the official validator confirms: FEASIBILITY: PASSED with zero constraint violations."*
+> *We implemented a recursive forecaster with four-week autoregressive lag features and rolling monthly averages, tightly aligned with Sri Lankan calendar paydays, monsoon rains, and holiday counts. Furthermore, we strictly adhered to domain rules: ambient brands Style and Tech were explicitly constrained to zero point zero cubic meters of chilled volume."*
+
+---
+
+### ⏱️ [2:30 – 3:20] Scene 4: Task 2B Peak-Day Allocation & Constraint Validation
+
+#### 📍 [ACTION 4A]: Switch to Terminal window
+*Type and run the official checker command:*
+```bash
+python check_allocation.py "BigBug_Datathon/submission_task2b.csv"
+```
+*Wait 1 second until the terminal outputs:*
+```text
+FEASIBILITY: PASSED - every rule satisfied.
+```
+
+🗣️ **[SAY — Tone: Decisive, authoritative]:**
+> *"Now for Task 2B: peak-day fleet allocation under Scenario S1. On this festival peak day, eighty-five store orders arrived, but several vehicles were grounded in the workshop.*
+> 
+> *When we ran capacity math on the Peliyagoda depot, we pinpointed the exact bottleneck: Refrigerated vehicle capacity. Total chilled demand surged to one hundred and eighty-one point six cubic meters across twenty-six Fresh orders. But Peliyagoda had only four refrigerated trucks and vans available, offering a maximum two-trip physical capacity of one hundred and seventy-two point four cubic meters. Serving every single chilled order was mathematically impossible."*
+
+---
+
+#### 📍 [ACTION 4B]: Keep terminal visible highlighting `FEASIBILITY: PASSED`
+*Point with cursor to `FEASIBILITY: PASSED - every rule satisfied.`*
+
+🗣️ **[SAY — Tone: Fair, solution-oriented]:**
+> *"Rather than deferring randomly, we engineered a greedy bin-packing prioritization policy focused on fairness: any store deferred yesterday was strictly guaranteed delivery today. In total, fourteen orders were deferred—thirteen chilled Fresh orders and one Style order—and every single one of them had been successfully served the previous day, preventing back-to-back stockouts.*
+> 
+> *As you can see live in our terminal, running the official competition validator outputs: FEASIBILITY: PASSED with zero violations across capacity, district segregation, and time budgets."*
 
 ---
 
 ### ⏱️ [3:20 – 3:55] Scene 5: Live Inference Demonstration & Wrap-Up
 
-#### 👁️ Visual Cues (What to show on screen)
-* **Back in Notebook:** Scroll to the very last cell: **"Final Inference Demonstration"**.
-* **Highlight Code & Output:**
-  * Task 1 Input order (`ORD0092308`) → Predicted Service Time: `8.22 min`, Predicted Late Prob: `0.0`.
-  * Task 2A Input request (`W0000`, Kandy Fresh Week 14) → Predicted Total: `1037.36 m³`, Chilled: `381.87 m³`.
-* **Switch To File Explorer:** Show the root workspace directory with `BigBug_Datathon.zip` and the generated submission CSVs.
+#### 📍 [ACTION 5A]: Return to Notebook and scroll to the very last cell: `# Final Inference Demonstration`
+*Highlight the executed output of Cell 1:*
+- *Task 1: Order `ORD0092308` (Peliyagoda, Fresh, Colombo) → `pred_service_min: 8.22`, `pred_late_prob: 0.0`*
+- *Task 2A: Row `W0000` (Kandy, Fresh, W14) → `pred_total_volume_m3: 1037.36`, `pred_chilled_volume_m3: 381.87`*
 
-#### 🎙️ Spoken Audio (Word-for-Word Script)
-> *"Finally, our solution is fully reproducible and deployment-ready. As demonstrated in our final notebook cell, our saved models load seamlessly and execute instant inference for new delivery orders and weekly forecast requests.*
+🗣️ **[SAY — Tone: Warm, concluding]:**
+> *"To ensure complete reproducibility, our final notebook includes a self-contained inference cell. As shown here, it loads our saved LightGBM models and instantly evaluates new delivery manifests and ten-week demand forecast requests in real time.*
 > 
-> *All deliverables—including our verified submission files, trained model weights, prioritization policy, and complete AI tool disclosures—are packaged in `BigBug_Datathon.zip`.*
+> *All deliverables—including our verified submission CSV files, trained model files, data preprocessing documentation, prioritization policy, and our transparent AI tool disclosure—are fully assembled inside `BigBug_Datathon.zip`.*
 > 
-> *Thank you to Rootcode and the judges for this engaging challenge. Team BigBug looks forward to the next stage of the Triathlon!"*
+> *Thank you very much to Rootcode and the judges for this fantastic challenge. We look forward to your questions!"*
 
 ---
 
-## 📊 Summary of Key Metrics to Mention
+## 📊 Quick-Reference Metric Cross-Reference Table
 
-| Metric | Value | Significance |
+*(Verified against `BigBug_Datathon/BigBug_FinalNotebook.ipynb`)*
+
+| Metric / Parameter | Value in Notebook | Expanded Form & Definition |
 |---|---|---|
-| **Task 1 Service RMSE** | `6.247 min` | Low error on high-variance unloading times |
-| **Task 1 Service MAE** | `3.918 min` | Average prediction within 4 minutes |
-| **Task 1 Val R²** | `0.7821` | Captures 78.2% of service time variance |
-| **Task 1 Lateness ROC-AUC** | `0.9381` | Exceptional rank-ordering of high-risk trips |
-| **Task 1 Brier Score** | `0.0401` | Highly calibrated probabilities via Isotonic Regression |
-| **Task 2B Chilled Demand** | `181.6 m³` | Exceeded available fleet capacity of `172.4 m³` |
-| **Task 2B Deferrals** | `14 orders` | Protected all outlets deferred yesterday |
-| **Task 2B Feasibility** | **PASSED** | 100% compliant with all domain & vehicle constraints |
+| **Raw Deliveries / Route Legs** | `92,307` / `91,894` | Historical delivery transactions & GPS route legs |
+| **Clean Labeled Set** | `91,894` rows | Combined labeled records after merging |
+| **Service Duration Mean / Median** | `19.85 min` / `16.00 min` | Dwell duration: departure minus arrival |
+| **Historical Lateness Rate** | `19.58%` (17,991 / 91,894) | Orders where arrival exceeded window close |
+| **Early Arrival Rate** | `4.38%` | Trucks arriving before window open |
+| **Engineered Features** | `37` features | Input dimensions for Task 1 models |
+| **Train / Validation Split** | `88,395` (96.2%) / `3,499` (3.8%) | Time-based holdout split (cutoff: 2026-01-17) |
+| **Task 1 Service RMSE** | `6.247 min` (Val) | Root Mean Squared Error (RMSE) |
+| **Task 1 Service MAE** | `3.918 min` (Val) | Mean Absolute Error (MAE) |
+| **Task 1 Service R²** | `0.7821` (Val) | Coefficient of Determination ($R^2$) |
+| **Task 1 Best Iteration (Service)** | `488` trees | Early stopping iteration for regressor |
+| **Task 1 Uncalibrated ROC-AUC** | `0.9738` (Val) | Receiver Operating Characteristic — Area Under the Curve |
+| **Task 1 Uncalibrated Brier Score** | `0.0475` (Val) | Probability forecast mean squared error |
+| **Task 1 Calibrated ROC-AUC** | `0.9750` (Val) | Area Under Curve after Isotonic Calibration |
+| **Task 1 Calibrated Brier Score** | `0.0400` (Val) | Calibrated probability error (lower is better) |
+| **Task 1 Best Iteration (Late)** | `680` trees | Early stopping iteration for classifier |
+| **Task 1 Test Output Orders** | `5,014` deliveries | Rows in `task1_test_inputs.csv` |
+| **Task 2A Grid & Horizons** | `6` streams, `10` weeks | 2 depots × 3 brands across 2026 W14–W23 |
+| **Task 2B Chilled Demand** | `181.6 m³` | Chilled volume demanded across 26 orders |
+| **Task 2B Available Fleet Capacity** | `172.4 m³` (max 2 trips) | Capacity of 4 available reefer vehicles |
+| **Task 2B Deferrals** | `14` orders (13 Fresh, 1 Style) | Protected 100% of outlets deferred yesterday |
+| **Task 2B Feasibility Result** | **PASSED** | Official validator (`check_allocation.py`) passed |
 
 ---
 
-## 🚀 Post-Recording Steps (Submit Before 11:59 PM)
+## 🚀 Recording & Submission Instructions
 
-1. **Review Recording:** Verify audio is audible and total runtime is between **3:15 and 4:15 minutes**.
-2. **Upload to YouTube:**
+1. **Rehearse Once:** Read the script aloud while scrolling in VS Code to ensure smooth timing (~3 minutes 45 seconds).
+2. **Record Screen:**
+   - Use Windows Game Bar (`Win + G`), OBS, or Zoom.
+   - Keep microphone volume clear and background quiet.
+3. **Upload Video:**
    - Go to [studio.youtube.com](https://studio.youtube.com/)
-   - Title: `Tech Triathlon 2026 Datathon - Team BigBug Demo`
-   - **Visibility: UNLISTED** (Crucial: Public is not needed, Private cannot be viewed by judges).
-3. **Grab the URL:** e.g., `https://youtu.be/xxxxxxxxx`
-4. **Submit Form:** Paste your unlisted YouTube link and upload `BigBug_Datathon.zip` at:
-   👉 **https://forms.gle/CcPPmttWdQgHvUdi6**
+   - Upload file → Title: `Tech Triathlon 2026 Datathon - Team BigBug Demo`
+   - **Visibility: UNLISTED** (Anyone with the link can watch).
+4. **Submit Form:**
+   - Link: https://forms.gle/CcPPmttWdQgHvUdi6
+   - Paste the YouTube link and upload `BigBug_Datathon.zip`.
